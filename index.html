@@ -15,6 +15,7 @@
             font-family: "PT Sans", serif;
             font-weight: 400;
             font-style: normal;
+            overflow: hidden; 
         }
 
         div {
@@ -44,6 +45,17 @@
             font-size: 20px;
             border: none;
         }
+
+        @media (max-width: 625px) { 
+            .puge img{
+                height: 300px;
+            }
+            #yes, #no{
+                height: 30px;
+                width: auto;
+                font-size: 10px;
+            }
+        }
     </style>
 </head>
 
@@ -72,8 +84,20 @@
         var no = document.getElementById("no");
         no.addEventListener("click", change);
         function change() {
-            var i = Math.floor(Math.random() * 1000) + 1;
-            var j = Math.floor(Math.random() * 200) + 1;
+
+            var windowWidth = window.innerWidth;
+            var windowHeight = window.innerHeight;
+            var buttonWidth = no.offsetWidth;
+            var buttonHeight = no.offsetHeight;
+
+            // Calculate maximum allowed positions to keep the button on-screen
+            var maxX = windowWidth - buttonWidth;
+            var maxY = windowHeight - buttonHeight;
+
+            // Generate random positions within the screen boundaries
+            var i = Math.floor(Math.random() * maxX);
+            var j = Math.floor(Math.random() * maxY);
+
             no.style.left = i + "px";
             no.style.top = j + "px";
 
